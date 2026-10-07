@@ -1,0 +1,21 @@
+# Maintainer: openOODA-tools <ops@openooda.org>
+pkgname=oosleep-bin
+_pkgname=oosleep
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="High-precision timer sleep supporting nanosecond resolution and monotonic clock loops."
+arch=('x86_64')
+url="https://github.com/openOODA-tools/oosleep"
+license=('Apache-2.0')
+depends=('glibc')
+provides=('oosleep')
+conflicts=('oosleep')
+source_x86_64=("${url}/releases/download/v${pkgver}/oosleep-linux-x86_64"
+               "uninstall.sh::https://raw.githubusercontent.com/openOODA-tools/${_pkgname}/v${pkgver}/uninstall.sh")
+sha256sums_x86_64=('SKIP'
+                   'SKIP')
+
+package() {
+    install -Dm755 "${srcdir}/oosleep-linux-x86_64" "${pkgdir}/usr/bin/oosleep"
+    install -Dm755 uninstall.sh "${pkgdir}/usr/bin/oosleep-uninstall"
+}
